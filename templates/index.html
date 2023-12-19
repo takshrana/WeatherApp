@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block header %}
+  {% block title %} Home {% endblock %}
+{% endblock %}
+{% block content %}
+  <section class="vh-100">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-8 col-lg-6 col-xl-4">
+        <form action="{{ url_for('home') }}" method="POST" id="weather-form">
+
+
+
+          <h3 class="mb-4 pb-2 fw-normal">Check the weather forecast</h3>
+
+          <div class="input-group rounded mb-3" >
+            <input type="search" class="form-control rounded" placeholder="City" aria-label="Search"
+              aria-describedby="search-addon-1 search-addon-2" name="city-name"/>
+            <button type="submit" class="input-group-text border-1 fw-bold" id="search-addon-1" form="weather-form"> Check
+            </button>
+            <button type="submit" class="input-group-text border-1 fw-bold" id="search-addon-2" form="weather-form" formaction="{{ url_for('add_city') }}"> Add City
+            </button>
+          </div>
+
+
+          <div class="mb-4 pb-2">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                value="metric" checked />
+              <label class="form-check-label" for="inlineRadio1">Celsius</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                value="imperial" />
+              <label class="form-check-label" for="inlineRadio2">Fahrenheit</label>
+            </div>
+          </div>
+        </form>
+        {% if weathers %}
+          {% for weather in weathers %}
+        <div class="card shadow-0 border">
+          <div class="card-body p-4">
+            <img src="https://openweathermap.org/img/wn/{{weather.icon}}@2x.png">
+            <h4 class="mb-1 sfw-normal">{{ weather.city }}</h4>
+            <p class="mb-2">Current temperature: <strong>{{ weather.temp }}{{ unit }}</strong></p>
+            <p>Feels like: <strong>{{ weather.feels_like }}{{ unit }}</strong></p>
+            <p>Max: <strong>{{ weather.temp_max }}{{ unit }}</strong>, Min: <strong>{{ weather.temp_min }}{{ unit }}</strong></p>
+
+            <div class="d-flex flex-row align-items-center">
+              <p class="mb-0 me-4">{{ weather.description.capitalize() }}</p>
+              <i class="fas fa-cloud fa-3x" style="color: #eee;"></i>
+            </div>
+
+          </div>
+        </div>
+          {% endfor %}
+        {% endif %}
+
+      </div>
+    </div>
+
+  </div>
+</section>
+{% endblock %}
