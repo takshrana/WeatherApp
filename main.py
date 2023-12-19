@@ -6,7 +6,7 @@ from sqlalchemy.orm import mapped_column
 import requests
 
 
-api_key = "97c012a3a9c1ea4c795ddd74d9f551eb"
+api_key = "USE_YOUR_API_KEY"
 weather_url = "https://api.openweathermap.org/data/2.5/weather"
 geolocation_url = "http://api.openweathermap.org/geo/1.0/direct"
 app = Flask(__name__)
